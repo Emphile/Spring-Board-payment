@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Students</h2>
+<ul>
+    {% for student in students %}
+        <li>{{ student.name }}
+            <form method="post" action="{{ url_for('make_payment') }}">
+                <input type="hidden" name="student_id" value="{{ student.id }}">
+                <input type="number" step="0.01" name="amount" placeholder="Enter amount" required>
+                <button type="submit">Make Payment</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Add Student</h2>
+<form method="post" action="{{ url_for('add_student') }}">
+    <input type="text" name="name" placeholder="Enter student name" required>
+    <button type="submit">Add Student</button>
+</form>
+{% endblock %}
+
